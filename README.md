@@ -26,6 +26,11 @@ While _managers_ have additional capabilities:
 1. Use the **File Menu** to clear the whiteboard, open an existing file, save the whiteboard (default or custom location) and close the whiteboard
 2. **Kick out** a particular user from the whiteboard
 
+## System Architecture
+The system adopted a server-client architecture, where a single server exists and interacts with clients (i.e., users and managers) to handle data access and storage. Here, the server acts as a storage hub for managers and users to access the contents of the whiteboard. In particular, this system utilized **Remote Method Invocation** (RMI) from Java to handle invocations of methods remotely belonging to the whiteboard objects between user-applications, allowing users to perform concurrent operations on them. RMI servants of the whiteboard includes the whiteboard canvas, a group chat, and an active user list. 
+
+On top of RMI, the system implemented **Transmission Control Protocol** (TCP) via sockets to establish inter-communications among the users and managers through the server. To execute this, a thread-per-request architecture was implemented, where a new thread is created to execute the requests. Furthermore, a graphical User Interface (GUI) has also been implemented for users and managers to interact with the whiteboard. In addition, any errors and responses associated with a particular request is visually displayed on each respective client GUIs. An implementation to display and handle failures or errors that may occur throughout server-client interactions is provided by the system.
+
 ## Getting Started
 
 > The following steps are to be used to run the JAR executables. To make any edits to the code and run directly from the source, proceed to the `/src/main/java` directories.
